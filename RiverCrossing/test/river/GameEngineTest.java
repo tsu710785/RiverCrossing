@@ -19,18 +19,28 @@ public class GameEngineTest {
         Assert.assertEquals("Farmer", farmer.getName());
         Assert.assertEquals(Location.START, farmer.getLocation());
         Assert.assertEquals("", farmer.getSound());
-        /* TODO Check getters for wolf, goose, and beans */
+        GameObject wolf = new Wolf();
+        Assert.assertEquals("Wolf", wolf.getName());
+        Assert.assertEquals(Location.START, wolf.getLocation());
+        Assert.assertEquals("Howl", wolf.getSound());
+        GameObject goose = new Goose();
+        Assert.assertEquals("Goose", goose.getName());
+        Assert.assertEquals(Location.START, goose.getLocation());
+        Assert.assertEquals("Honk", goose.getSound());
+        GameObject beans = new Beans();
+        Assert.assertEquals("Beans", beans.getName());
+        Assert.assertEquals(Location.START, beans.getLocation());
+        Assert.assertEquals("", beans.getSound());
     }
 
     @Test
     public void testMidTransport() {
         GameEngine engine = new GameEngine();
         Assert.assertEquals(Location.START, engine.getLocation(Item.MID));
-
-        /*
-         * TODO Transport he goose to the other side, unload it, and check that it has
-         * the appropriate location
-         */
+        engine.loadBoat(Item.MID);
+        engine.rowBoat();
+        engine.unloadBoat(Item.MID);
+        Assert.assertEquals(Location.FINISH, engine.getLocation(Item.MID));
     }
 
     @Test
@@ -51,11 +61,43 @@ public class GameEngineTest {
         Assert.assertFalse(engine.gameIsLost());
         Assert.assertFalse(engine.gameIsWon());
 
-        /*
-         * TODO The steps above are the first two steps in a winning game, complete the
-         * steps and check that the game is won.
-         */
+        // pickup beans at start
+        engine.loadBoat(Item.BOTTOM);
+        engine.rowBoat();
+        Assert.assertFalse(engine.gameIsLost());
+        Assert.assertFalse(engine.gameIsWon());
 
+        // put beans at end & pickup goose
+        engine.unloadBoat(Item.BOTTOM);
+        engine.loadBoat(Item.MID);
+        engine.rowBoat();
+        Assert.assertFalse(engine.gameIsLost());
+        Assert.assertFalse(engine.gameIsWon());
+
+        // put goose at start & pickup wolf
+        engine.unloadBoat(Item.MID);
+        engine.loadBoat(Item.TOP);
+        engine.rowBoat();
+        Assert.assertFalse(engine.gameIsLost());
+        Assert.assertFalse(engine.gameIsWon());
+
+        // put wolf at end
+        engine.unloadBoat(Item.TOP);
+        engine.rowBoat();
+        Assert.assertFalse(engine.gameIsLost());
+        Assert.assertFalse(engine.gameIsWon());
+
+        // pickup goose
+        engine.loadBoat(Item.MID);
+        engine.rowBoat();
+        Assert.assertFalse(engine.gameIsLost());
+        Assert.assertFalse(engine.gameIsWon());
+
+        // unload goose, player & win the game
+        engine.unloadBoat(Item.MID);
+        engine.unloadBoat(Item.PLAYER);
+        Assert.assertFalse(engine.gameIsLost());
+        Assert.assertTrue(engine.gameIsWon());
     }
 
     @Test
@@ -70,11 +112,18 @@ public class GameEngineTest {
         Assert.assertFalse(engine.gameIsLost());
         Assert.assertFalse(engine.gameIsWon());
 
-        /*
-         * TODO Once you transport the goose, go back alone, pick up the wolf, transport
-         * the wolf, then go back alone again. After you go back alone the second time,
-         * check that the game is lost.
-         */
+        // pickup wolf
+        engine.rowBoat();
+        engine.loadBoat(Item.TOP);
+        engine.rowBoat();
+        Assert.assertFalse(engine.gameIsLost());
+        Assert.assertFalse(engine.gameIsWon());
+
+        // put wolf, goose together & leave, test lose
+        engine.unloadBoat(Item.TOP);
+        engine.rowBoat();
+        Assert.assertTrue(engine.gameIsLost());
+        Assert.assertFalse(engine.gameIsWon());
     }
 
     @Test
