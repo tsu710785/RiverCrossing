@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import river.GameEngine.Item;
-import river.GameEngine.Location;
 
 public class GameEngineTest {
 
@@ -139,10 +138,10 @@ public class GameEngineTest {
         Assert.assertFalse(engine.gameIsWon());
 
         // save the state
-        GameEngine.Location topLoc = engine.getLocation(Item.TOP);
-        GameEngine.Location midLoc = engine.getLocation(Item.MID);
-        GameEngine.Location bottomLoc = engine.getLocation(Item.BOTTOM);
-        GameEngine.Location playerLoc = engine.getLocation(Item.PLAYER);
+        Location topLoc = engine.getLocation(Item.TOP);
+        Location midLoc = engine.getLocation(Item.MID);
+        Location bottomLoc = engine.getLocation(Item.BOTTOM);
+        Location playerLoc = engine.getLocation(Item.PLAYER);
 
         // This action should do nothing since the wolf is not on the same shore as the
         // boat

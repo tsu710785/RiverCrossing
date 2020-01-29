@@ -10,7 +10,6 @@ import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import river.GameEngine.Item;
-import river.GameEngine.Location;
 
 /**
  * Graphical interface for the River application

@@ -6,60 +6,56 @@ public class GameEngine {
         TOP, MID, BOTTOM, PLAYER;
     }
 
-    public enum Location {
-        START, FINISH, BOAT;
-    }
-
-    private GameObject top;
-    private GameObject mid;
-    private GameObject bottom;
-    private GameObject player;
+    private GameObject wolf;
+    private GameObject goose;
+    private GameObject beans;
+    private GameObject farmer;
     private Location currentLocation;
 
     public GameEngine() {
-        top = GameObject.newGameObject("Wolf", "Howl");
-        mid = GameObject.newGameObject("Goose", "Honk");
-        bottom = GameObject.newGameObject("Beans", "");
-        player = GameObject.newGameObject("Farmer", "");
+        wolf = GameObject.newGameObject("Wolf", "Howl");
+        goose = GameObject.newGameObject("Goose", "Honk");
+        beans = GameObject.newGameObject("Beans", "");
+        farmer = GameObject.newGameObject("Farmer", "");
         currentLocation = Location.START;
     }
 
     public String getName(Item id) {
         switch (id) {
         case TOP:
-            return top.getName();
+            return wolf.getName();
         case MID:
-            return mid.getName();
+            return goose.getName();
         case BOTTOM:
-            return bottom.getName();
+            return beans.getName();
         default:
-            return player.getName();
+            return farmer.getName();
         }
     }
 
     public Location getLocation(Item id) {
         switch (id) {
         case TOP:
-            return top.getLocation();
+            return wolf.getLocation();
         case MID:
-            return mid.getLocation();
+            return goose.getLocation();
         case BOTTOM:
-            return bottom.getLocation();
+            return beans.getLocation();
         default:
-            return player.getLocation();
+            return farmer.getLocation();
         }
     }
 
     public String getSound(Item id) {
         switch (id) {
         case TOP:
-            return top.getSound();
+            return wolf.getSound();
         case MID:
-            return mid.getSound();
+            return goose.getSound();
         case BOTTOM:
-            return bottom.getSound();
+            return beans.getSound();
         default:
-            return player.getSound();
+            return farmer.getSound();
         }
     }
 
@@ -71,26 +67,26 @@ public class GameEngine {
 
         switch (id) {
         case TOP:
-            if (top.getLocation() == currentLocation && mid.getLocation() != Location.BOAT
-                    && bottom.getLocation() != Location.BOAT) {
-                top.setLocation(Location.BOAT);
+            if (wolf.getLocation() == currentLocation && goose.getLocation() != Location.BOAT
+                    && beans.getLocation() != Location.BOAT) {
+                wolf.setLocation(Location.BOAT);
             }
             break;
         case MID:
-            if (mid.getLocation() == currentLocation && top.getLocation() != Location.BOAT
-                    && bottom.getLocation() != Location.BOAT) {
-                mid.setLocation(Location.BOAT);
+            if (goose.getLocation() == currentLocation && wolf.getLocation() != Location.BOAT
+                    && beans.getLocation() != Location.BOAT) {
+                goose.setLocation(Location.BOAT);
             }
             break;
         case BOTTOM:
-            if (bottom.getLocation() == currentLocation && top.getLocation() != Location.BOAT
-                    && mid.getLocation() != Location.BOAT) {
-                bottom.setLocation(Location.BOAT);
+            if (beans.getLocation() == currentLocation && wolf.getLocation() != Location.BOAT
+                    && goose.getLocation() != Location.BOAT) {
+                beans.setLocation(Location.BOAT);
             }
             break;
         case PLAYER:
-            if (player.getLocation() == currentLocation) {
-                player.setLocation(Location.BOAT);
+            if (farmer.getLocation() == currentLocation) {
+                farmer.setLocation(Location.BOAT);
             }
         default: // do nothing
         }
@@ -99,23 +95,23 @@ public class GameEngine {
     public void unloadBoat(Item id) {
         switch (id) {
         case TOP:
-            if (top.getLocation() == Location.BOAT) {
-                top.setLocation(currentLocation);
+            if (wolf.getLocation() == Location.BOAT) {
+                wolf.setLocation(currentLocation);
             }
             break;
         case MID:
-            if (mid.getLocation() == Location.BOAT) {
-                mid.setLocation(currentLocation);
+            if (goose.getLocation() == Location.BOAT) {
+                goose.setLocation(currentLocation);
             }
             break;
         case BOTTOM:
-            if (bottom.getLocation() == Location.BOAT) {
-                bottom.setLocation(currentLocation);
+            if (beans.getLocation() == Location.BOAT) {
+                beans.setLocation(currentLocation);
             }
             break;
         case PLAYER:
-            if (player.getLocation() == Location.BOAT) {
-                player.setLocation(currentLocation);
+            if (farmer.getLocation() == Location.BOAT) {
+                farmer.setLocation(currentLocation);
             }
         default: // do nothing
         }
@@ -131,34 +127,34 @@ public class GameEngine {
     }
 
     public boolean gameIsWon() {
-        return top.getLocation() == Location.FINISH && mid.getLocation() == Location.FINISH
-                && bottom.getLocation() == Location.FINISH && player.getLocation() == Location.FINISH;
+        return wolf.getLocation() == Location.FINISH && goose.getLocation() == Location.FINISH
+                && beans.getLocation() == Location.FINISH && farmer.getLocation() == Location.FINISH;
     }
 
     public boolean gameIsLost() {
-        if (mid.getLocation() == Location.BOAT) {
+        if (goose.getLocation() == Location.BOAT) {
             return false;
         }
-        if (mid.getLocation() == player.getLocation()) {
+        if (goose.getLocation() == farmer.getLocation()) {
             return false;
         }
-        if (mid.getLocation() == currentLocation) {
+        if (goose.getLocation() == currentLocation) {
             return false;
         }
-        if (mid.getLocation() == top.getLocation()) {
+        if (goose.getLocation() == wolf.getLocation()) {
             return true;
         }
-        if (mid.getLocation() == bottom.getLocation()) {
+        if (goose.getLocation() == beans.getLocation()) {
             return true;
         }
         return false;
     }
 
     public void resetGame() {
-        top.setLocation(Location.START);
-        mid.setLocation(Location.START);
-        bottom.setLocation(Location.START);
-        player.setLocation(Location.START);
+        wolf.setLocation(Location.START);
+        goose.setLocation(Location.START);
+        beans.setLocation(Location.START);
+        farmer.setLocation(Location.START);
         currentLocation = Location.START;
     }
 
