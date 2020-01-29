@@ -17,10 +17,10 @@ public class GameEngine {
     private Location currentLocation;
 
     public GameEngine() {
-        top = new Wolf();
-        mid = new Goose();
-        bottom = new Beans();
-        player = new Farmer();
+        top = GameObject.newGameObject("Wolf", "Howl");
+        mid = GameObject.newGameObject("Goose", "Honk");
+        bottom = GameObject.newGameObject("Beans", "");
+        player = GameObject.newGameObject("Farmer", "");
         currentLocation = Location.START;
     }
 

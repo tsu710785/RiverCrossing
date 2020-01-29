@@ -15,19 +15,19 @@ public class GameEngineTest {
 
     @Test
     public void testObjects() {
-        GameObject farmer = new Farmer();
+        GameObject farmer = GameObject.newGameObject("Farmer", "");
         Assert.assertEquals("Farmer", farmer.getName());
         Assert.assertEquals(Location.START, farmer.getLocation());
         Assert.assertEquals("", farmer.getSound());
-        GameObject wolf = new Wolf();
+        GameObject wolf = GameObject.newGameObject("Wolf", "Howl");
         Assert.assertEquals("Wolf", wolf.getName());
         Assert.assertEquals(Location.START, wolf.getLocation());
         Assert.assertEquals("Howl", wolf.getSound());
-        GameObject goose = new Goose();
+        GameObject goose = GameObject.newGameObject("Goose", "Honk");
         Assert.assertEquals("Goose", goose.getName());
         Assert.assertEquals(Location.START, goose.getLocation());
         Assert.assertEquals("Honk", goose.getSound());
-        GameObject beans = new Beans();
+        GameObject beans = GameObject.newGameObject("Beans", "");
         Assert.assertEquals("Beans", beans.getName());
         Assert.assertEquals(Location.START, beans.getLocation());
         Assert.assertEquals("", beans.getSound());
