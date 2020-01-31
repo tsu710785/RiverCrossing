@@ -4,19 +4,19 @@ import java.util.HashMap;
 
 public class GameEngine {
 
-    public enum Item {
-        WOLF, GOOSE, BEANS, FARMER;
-    }
-
+    public static final Item BEANS = Item.ITEM_0;
+    public static final Item WOLF = Item.ITEM_2;
+    public static final Item GOOSE = Item.ITEM_1;
+    public static final Item FARMER = Item.ITEM_3;
     private Location boatLocation;
     final private HashMap<Item, GameObject> map;
 
     public GameEngine() {
         map = new HashMap<>();
-        map.put(Item.WOLF, GameObject.newGameObject("Wolf", "Howl"));
-        map.put(Item.GOOSE, GameObject.newGameObject("Goose", "Honk"));
-        map.put(Item.BEANS, GameObject.newGameObject("Beans", ""));
-        map.put(Item.FARMER, GameObject.newGameObject("Farmer", ""));
+        map.put(WOLF, GameObject.newGameObject("Wolf", "Howl"));
+        map.put(GOOSE, GameObject.newGameObject("Goose", "Honk"));
+        map.put(BEANS, GameObject.newGameObject("Beans", ""));
+        map.put(FARMER, GameObject.newGameObject("Farmer", ""));
         boatLocation = Location.START;
 
     }
@@ -70,13 +70,13 @@ public class GameEngine {
     }
 
     public boolean gameIsLost() {
-        if (map.get(Item.GOOSE).getLocation() == Location.BOAT
-                || map.get(Item.GOOSE).getLocation() == map.get(Item.FARMER).getLocation()
-                || map.get(Item.GOOSE).getLocation() == boatLocation) {
+        if (map.get(Item.ITEM_1).getLocation() == Location.BOAT
+                || map.get(Item.ITEM_1).getLocation() == map.get(Item.ITEM_3).getLocation()
+                || map.get(Item.ITEM_1).getLocation() == boatLocation) {
             return false;
         }
-        if (map.get(Item.GOOSE).getLocation() == map.get(Item.WOLF).getLocation()
-                || map.get(Item.GOOSE).getLocation() == map.get(Item.BEANS).getLocation()) {
+        if (map.get(Item.ITEM_1).getLocation() == map.get(Item.ITEM_2).getLocation()
+                || map.get(Item.ITEM_1).getLocation() == map.get(Item.ITEM_0).getLocation()) {
             return true;
         }
         return false;
