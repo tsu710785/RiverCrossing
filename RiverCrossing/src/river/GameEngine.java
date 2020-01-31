@@ -1,5 +1,6 @@
 package river;
 
+import java.awt.*;
 import java.util.HashMap;
 
 public class GameEngine {
@@ -13,24 +14,24 @@ public class GameEngine {
 
     public GameEngine() {
         map = new HashMap<>();
-        map.put(WOLF, GameObject.newGameObject("Wolf", "Howl"));
-        map.put(GOOSE, GameObject.newGameObject("Goose", "Honk"));
-        map.put(BEANS, GameObject.newGameObject("Beans", ""));
-        map.put(FARMER, GameObject.newGameObject("Farmer", ""));
+        map.put(WOLF, GameObject.newGameObject("Wolf", Color.blue));
+        map.put(GOOSE, GameObject.newGameObject("Goose", Color.blue));
+        map.put(BEANS, GameObject.newGameObject("Beans", Color.blue));
+        map.put(FARMER, GameObject.newGameObject("Farmer",  Color.pink));
         boatLocation = Location.START;
 
     }
 
-    public String getItemName(Item id) {
-        return map.get(id).getName();
+    public String getItemLabel(Item id) {
+        return map.get(id).getLabel();
     }
 
     public Location getItemLocation(Item id) {
         return map.get(id).getLocation();
     }
 
-    public String getItemSound(Item id) {
-        return map.get(id).getSound();
+    public Color getItemColor(Item id) {
+        return map.get(id).getColor();
     }
 
     public Location getItemCurrentLocation() {
