@@ -39,11 +39,18 @@ public class GameEngine {
     }
 
     public void loadBoat(Item id) {
-        if (map.get(id).getLocation() == boatLocation) {
-            for (Item key: map.keySet()) {
-                if(key != id && map.get(key).getLocation() !=Location.BOAT) {
-                    map.get(id).setLocation(Location.BOAT);
+        if (id == Item.ITEM_3) {
+            if (map.get(id).getLocation() == boatLocation) {
+                map.get(id).setLocation(Location.BOAT);
+            }
+        } else {
+            if (map.get(id).getLocation() == boatLocation) {
+                for (Item key: map.keySet()) {
+                    if(key != id && map.get(key).getLocation() == Location.BOAT) {
+                        return;
+                    }
                 }
+                map.get(id).setLocation(Location.BOAT);
             }
         }
     }
