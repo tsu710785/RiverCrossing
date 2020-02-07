@@ -20,6 +20,10 @@ public class RiverGUI extends JPanel implements MouseListener {
     // ==========================================================
     // Fields (hotspots)
     // ==========================================================
+    int[] dx = { -60, -60, 0, 0 };
+    int[] dy = { -60, 0, 0, -60 };
+    int leftBaseX = 80;
+    int leftBaseY= 275;
 
     private final Rectangle leftFarmerRect = new Rectangle(80, 215, 50, 50);
     private final Rectangle leftWolfRect = new Rectangle(20, 215, 50, 50);
@@ -108,28 +112,14 @@ public class RiverGUI extends JPanel implements MouseListener {
         paintRectangle(g, Color.ORANGE, "", rectangle);
     }
     private Rectangle getItemRectangle(Item item) {
+        Rectangle rect = new Rectangle(leftBaseX + dx[item.ordinal()],
+                leftBaseY + dy[item.ordinal()], 50, 50);
         if (engine.getItemLocation(item) == Location.START) {
-            if (item == Item.ITEM_3) {
-                return leftFarmerRect;
-            } else if (item == Item.ITEM_2) {
-                return leftWolfRect;
-            } else if (item == Item.ITEM_1) {
-                return leftGooseRect;
-            } else {
-                // ITEM_0
-                return leftBeansRect;
-            }
+            return new Rectangle(leftBaseX + dx[item.ordinal()],
+                    leftBaseY + dy[item.ordinal()], 50, 50);
         } else if (engine.getItemLocation(item) == Location.FINISH) {
-            if (item == Item.ITEM_3) {
-                return rightFarmerRect;
-            } else if (item == Item.ITEM_2) {
-                return rightWolfRect;
-            } else if (item == Item.ITEM_1) {
-                return rightGooseRect;
-            } else {
-                // ITEM_0
-                return rightBeansRect;
-            }
+            return new Rectangle(leftBaseX + 650 + dx[item.ordinal()],
+                    leftBaseY + dy[item.ordinal()], 50, 50);
         } else {
             // BOAT
             if (engine.getItemCurrentLocation() == Location.START) {

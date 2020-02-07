@@ -46,7 +46,7 @@ public class GameEngine {
         } else {
             if (map.get(id).getLocation() == boatLocation) {
                 for (Item key: map.keySet()) {
-                    if(key != id && map.get(key).getLocation() == Location.BOAT) {
+                    if(key != id && key != Item.ITEM_3 && map.get(key).getLocation() == Location.BOAT) {
                         return;
                     }
                 }
