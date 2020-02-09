@@ -47,7 +47,7 @@ public class RiverGUI extends JPanel implements MouseListener {
     // Private Fields
     // ==========================================================
 
-    private GameEngine engine; // Model
+    private FarmerGameEngine engine; // Model
     private boolean restart = false;
 
     // ==========================================================
@@ -56,7 +56,7 @@ public class RiverGUI extends JPanel implements MouseListener {
 
     public RiverGUI() {
 
-        engine = new GameEngine();
+        engine = new FarmerGameEngine();
         addMouseListener(this);
     }
 
@@ -122,7 +122,7 @@ public class RiverGUI extends JPanel implements MouseListener {
                     leftBaseY + dy[item.ordinal()], 50, 50);
         } else {
             // BOAT
-            if (engine.getItemCurrentLocation() == Location.START) {
+            if (engine.getBoatLocation() == Location.START) {
                 if (item == Item.ITEM_3) {
                     return leftBoatDriverRect;
                 } else {
@@ -140,7 +140,7 @@ public class RiverGUI extends JPanel implements MouseListener {
     }
 
     private Rectangle getBoatRectangle() {
-        if (engine.getItemCurrentLocation() == Location.START) {
+        if (engine.getBoatLocation() == Location.START) {
             return leftBoatRect;
         } else {
             return rightBoatRect;
@@ -252,11 +252,11 @@ public class RiverGUI extends JPanel implements MouseListener {
                 engine.loadBoat(Item.ITEM_0);
             }
         } else if (leftBoatDriverRect.contains(e.getPoint())) {
-            if (engine.getItemCurrentLocation() == Location.START && engine.getItemLocation(Item.ITEM_3) == Location.BOAT) {
+            if (engine.getBoatLocation() == Location.START && engine.getItemLocation(Item.ITEM_3) == Location.BOAT) {
                 engine.unloadBoat(Item.ITEM_3);
             }
         } else if (leftBoatPassengerRect.contains(e.getPoint())) {
-            if (engine.getItemCurrentLocation() == Location.START) {
+            if (engine.getBoatLocation() == Location.START) {
                 if (engine.getItemLocation(Item.ITEM_2) == Location.BOAT) {
                     engine.unloadBoat(Item.ITEM_2);
                 } else if (engine.getItemLocation(Item.ITEM_1) == Location.BOAT) {
@@ -266,7 +266,7 @@ public class RiverGUI extends JPanel implements MouseListener {
                 }
             }
         } else if (leftBoatRect.contains(e.getPoint())) {
-            if (engine.getItemCurrentLocation() == Location.START && engine.getItemLocation(Item.ITEM_3) == Location.BOAT) {
+            if (engine.getBoatLocation() == Location.START && engine.getItemLocation(Item.ITEM_3) == Location.BOAT) {
                 engine.rowBoat();
             }
         } else if (rightFarmerRect.contains(e.getPoint())) {
@@ -286,11 +286,11 @@ public class RiverGUI extends JPanel implements MouseListener {
                 engine.loadBoat(Item.ITEM_0);
             }
         } else if (rightBoatDriverRect.contains(e.getPoint())) {
-            if (engine.getItemCurrentLocation() == Location.FINISH && engine.getItemLocation(Item.ITEM_3) == Location.BOAT) {
+            if (engine.getBoatLocation() == Location.FINISH && engine.getItemLocation(Item.ITEM_3) == Location.BOAT) {
                 engine.unloadBoat(Item.ITEM_3);
             }
         } else if (rightBoatPassengerRect.contains(e.getPoint())) {
-            if (engine.getItemCurrentLocation() == Location.FINISH) {
+            if (engine.getBoatLocation() == Location.FINISH) {
                 if (engine.getItemLocation(Item.ITEM_2) == Location.BOAT) {
                     engine.unloadBoat(Item.ITEM_2);
                 } else if (engine.getItemLocation(Item.ITEM_1) == Location.BOAT) {
@@ -300,7 +300,7 @@ public class RiverGUI extends JPanel implements MouseListener {
                 }
             }
         } else if (rightBoatRect.contains(e.getPoint())) {
-            if (engine.getItemCurrentLocation() == Location.FINISH && engine.getItemLocation(Item.ITEM_3) == Location.BOAT) {
+            if (engine.getBoatLocation() == Location.FINISH && engine.getItemLocation(Item.ITEM_3) == Location.BOAT) {
                 engine.rowBoat();
             }
         } else {

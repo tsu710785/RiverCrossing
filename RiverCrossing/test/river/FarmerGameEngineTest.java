@@ -6,15 +6,15 @@ import org.junit.Test;
 
 import java.awt.*;
 
-public class GameEngineTest {
-    private GameEngine engine;
+public class FarmerGameEngineTest {
+    private FarmerGameEngine engine;
     public static final Item BEANS = Item.ITEM_0;
     public static final Item WOLF = Item.ITEM_2;
     public static final Item GOOSE = Item.ITEM_1;
     public static final Item FARMER = Item.ITEM_3;
     @Before
     public void setUp() throws Exception {
-        engine = new GameEngine();
+        engine = new FarmerGameEngine();
     }
     private void transport(Item item) {
         /*
