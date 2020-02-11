@@ -10,15 +10,19 @@ public class FarmerGameEngine implements GameEngine {
     public static final Item GOOSE = Item.ITEM_1;
     public static final Item FARMER = Item.ITEM_3;
     private Location boatLocation;
+    private int capacity;
+    private boolean hasDriver;
     final private HashMap<Item, GameObject> map;
 
     public FarmerGameEngine() {
         map = new HashMap<>();
-        map.put(WOLF, GameObject.newGameObject("Wolf", Color.blue));
-        map.put(GOOSE, GameObject.newGameObject("Goose", Color.blue));
-        map.put(BEANS, GameObject.newGameObject("Beans", Color.blue));
-        map.put(FARMER, GameObject.newGameObject("Farmer",  Color.pink));
+        map.put(WOLF, new GameObject("Wolf", Color.blue, Location.START));
+        map.put(GOOSE, new GameObject("Goose", Color.blue, Location.START));
+        map.put(BEANS, new GameObject("Beans", Color.blue, Location.START));
+        map.put(FARMER, new GameObject("Farmer",  Color.pink, Location.START));
         boatLocation = Location.START;
+        capacity = 0;
+        hasDriver = false;
 
     }
 
@@ -44,19 +48,12 @@ public class FarmerGameEngine implements GameEngine {
 
     @Override
     public void loadBoat(Item id) {
-        if (id == Item.ITEM_3) {
-            if (map.get(id).getLocation() == boatLocation) {
-                map.get(id).setLocation(Location.BOAT);
-            }
-        } else {
-            if (map.get(id).getLocation() == boatLocation) {
-                for (Item key: map.keySet()) {
-                    if(key != id && key != Item.ITEM_3 && map.get(key).getLocation() == Location.BOAT) {
-                        return;
-                    }
-                }
-                map.get(id).setLocation(Location.BOAT);
-            }
+        // check full before load
+        if (capacity >= 2) return;
+        if (map.get(id).getLocation() == boatLocation) {
+            map.get(id).setLocation(Location.BOAT);
+            capacity++;
+            if (id == Item.ITEM_3) hasDriver = true;
         }
     }
 
@@ -64,11 +61,14 @@ public class FarmerGameEngine implements GameEngine {
     public void unloadBoat(Item id) {
         if (map.get(id).getLocation() == Location.BOAT) {
             map.get(id).setLocation(boatLocation);
+            if (id == Item.ITEM_3) hasDriver = false;
+            capacity--;
         }
     }
 
     @Override
     public void rowBoat() {
+        if (map.get(FARMER).getLocation() != Location.BOAT) return;
         assert (boatLocation != Location.BOAT);
         if (boatLocation == Location.START) {
             boatLocation = Location.FINISH;

@@ -47,7 +47,8 @@ public class RiverGUI extends JPanel implements MouseListener {
     // Private Fields
     // ==========================================================
 
-    private FarmerGameEngine engine; // Model
+//    private FarmerGameEngine engine; // Model
+    private RobotGameEngine engine; // Model
     private boolean restart = false;
 
     // ==========================================================
@@ -56,7 +57,8 @@ public class RiverGUI extends JPanel implements MouseListener {
 
     public RiverGUI() {
 
-        engine = new FarmerGameEngine();
+//        engine = new FarmerGameEngine();
+        engine = new RobotGameEngine();
         addMouseListener(this);
     }
 
@@ -105,7 +107,7 @@ public class RiverGUI extends JPanel implements MouseListener {
             }
         }
         Rectangle rectangle = getItemRectangle(item);
-        paintRectangle(g, color, label, rectangle);
+        paintRectangle(g, engine.getItemColor(item), engine.getItemLabel(item), rectangle);
     }
     private void paintBoat(Graphics g) {
         Rectangle rectangle = getBoatRectangle();

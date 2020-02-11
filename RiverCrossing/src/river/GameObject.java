@@ -8,16 +8,19 @@ public class GameObject {
     protected Location location;
     protected Color color;
 
-    GameObject() {
+    GameObject(String label, Color color, Location location) {
+        this.label = label;
+        this.color = color;
+        this.location = location;
     }
 
-    public static GameObject newGameObject(String label, Color color) {
-        GameObject object = new GameObject();
-        object.label = label;
-        object.color = color;
-        object.location = Location.START;
-        return object;
-    }
+//    public static GameObject newGameObject(String label, Color color, Location location) {
+//        GameObject object = new GameObject();
+//        object.label = label;
+//        object.color = color;
+//        object.location = location;
+//        return object;
+//    }
 
     public String getLabel() {
         return label;
